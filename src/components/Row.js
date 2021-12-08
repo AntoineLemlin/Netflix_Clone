@@ -27,6 +27,7 @@ const Row = (props) => {
               props.isLargeRow ? movie.poster_path : movie.backdrop_path
             }`}
             alt={movie.name}
+            onMouseEnter={() => props.setMovie(movie)}
           />
         ))}
       </div>

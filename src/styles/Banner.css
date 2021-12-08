@@ -2,6 +2,7 @@
   color: white;
   object-fit: contain;
   height: 448px;
+  transition: background 0.5s;
 }
 
 .banner_contents {
@@ -54,4 +55,12 @@
     rgba(37, 37, 37, 0.61),
     #111
   );
+}
+
+@media screen and (max-width: 480px) {
+  .banner_description {
+    width: 75%;
+    max-width: unset;
+    font-size: 0.6rem;
+  }
 }
