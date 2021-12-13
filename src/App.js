@@ -7,52 +7,171 @@ import { useState } from "react";
 
 function App() {
   const [movie, setMovie] = useState([]);
+  const [genre, setGenre] = useState("all");
 
   return (
     <div className="App">
-      <Nav />
+      <Nav setGenre={setGenre} genre={genre} />
       <Banner movie={movie} setMovie={setMovie} />
-      <Row
-        title="NETFLIX ORIGINALS"
-        fetchUrl={requests.fetchNetflixOriginals}
-        isLargeRow
-        setMovie={setMovie}
-      />
-      <Row
-        setMovie={setMovie}
-        title="Trending now"
-        fetchUrl={requests.fetchTrending}
-      />
-      <Row
-        setMovie={setMovie}
-        title="Top Rated"
-        fetchUrl={requests.fetchTopRated}
-      />
-      <Row
-        setMovie={setMovie}
-        title="Action Movies"
-        fetchUrl={requests.fetchActionMovies}
-      />
-      <Row
-        setMovie={setMovie}
-        title="Comedy Movies"
-        fetchUrl={requests.fetchComedyMovies}
-      />
-      <Row
-        setMovie={setMovie}
-        title="Horror Movies"
-        fetchUrl={requests.fetchHorrorMovies}
-      />
-      <Row
-        setMovie={setMovie}
-        title="Romance Movies"
-        fetchUrl={requests.fetchRomanceMovies}
-      />
-      <Row
-        setMovie={setMovie}
-        title="Documentaries"
-        fetchUrl={requests.fetchDocumentaries}
-      />
+
+      {genre === "new" ? (
+        <Row
+          title="Recently Added"
+          fetchUrl={requests.fetchNew}
+          isLargeRow
+          genre={genre}
+          setMovie={setMovie}
+        />
+      ) : (
+        <>
+          <Row
+            title="NETFLIX ORIGINALS"
+            fetchUrl={(function () {
+              switch (genre) {
+                case "all":
+                  return requests.fetchNetflixOriginalsAll;
+                  break;
+                case "movie":
+                  return requests.fetchNetflixOriginalsMovie;
+                  break;
+                case "tv":
+                  return requests.fetchNetflixOriginalsTv;
+                  break;
+              }
+            })()}
+            isLargeRow
+            setMovie={setMovie}
+          />
+
+          <Row
+            setMovie={setMovie}
+            title="Trending now"
+            fetchUrl={(function () {
+              switch (genre) {
+                case "all":
+                  return requests.fetchTrendingAll;
+                  break;
+                case "movie":
+                  return requests.fetchTrendingMovie;
+                  break;
+                case "tv":
+                  return requests.fetchTrendingTv;
+                  break;
+              }
+            })()}
+          />
+          <Row
+            setMovie={setMovie}
+            title="Top Rated"
+            fetchUrl={(function () {
+              switch (genre) {
+                case "all":
+                  return requests.fetchTopRatedAll;
+                  break;
+                case "movie":
+                  return requests.fetchTopRatedMovie;
+                  break;
+                case "tv":
+                  return requests.fetchTopRatedTv;
+                  break;
+              }
+            })()}
+          />
+          {genre === "tv" ? (
+            ""
+          ) : (
+            <Row
+              setMovie={setMovie}
+              title="Action Movies"
+              fetchUrl={(function () {
+                switch (genre) {
+                  case "all":
+                    return requests.fetchActionMoviesAll;
+                    break;
+                  case "movie":
+                    return requests.fetchActionMoviesMovie;
+                    break;
+                  case "tv":
+                    return requests.fetchActionMoviesTv;
+                    break;
+                }
+              })()}
+            />
+          )}
+          <Row
+            setMovie={setMovie}
+            title={genre === "tv" ? "Comedy Series" : "Comedy Movies"}
+            fetchUrl={(function () {
+              switch (genre) {
+                case "all":
+                  return requests.fetchComedyMoviesAll;
+                  break;
+                case "movie":
+                  return requests.fetchComedyMoviesMovie;
+                  break;
+                case "tv":
+                  return requests.fetchComedyMoviesTv;
+                  break;
+              }
+            })()}
+          />
+          {genre === "tv" ? (
+            ""
+          ) : (
+            <Row
+              setMovie={setMovie}
+              title="Horror Movies"
+              fetchUrl={(function () {
+                switch (genre) {
+                  case "all":
+                    return requests.fetchHorrorMoviesAll;
+                    break;
+                  case "movie":
+                    return requests.fetchHorrorMoviesMovie;
+                    break;
+                  case "tv":
+                    return requests.fetchHorrorMoviesTv;
+                    break;
+                }
+              })()}
+            />
+          )}
+          <Row
+            setMovie={setMovie}
+            title={genre === "tv" ? "Romance Series" : "Romance Movies"}
+            fetchUrl={(function () {
+              switch (genre) {
+                case "all":
+                  return requests.fetchRomanceMoviesAll;
+                  break;
+                case "movie":
+                  return requests.fetchRomanceMoviesMovie;
+                  break;
+                case "tv":
+                  return requests.fetchRomanceMoviesTv;
+                  break;
+              }
+            })()}
+          />
+          <Row
+            setMovie={setMovie}
+            title="Documentaries"
+            fetchUrl={(function () {
+              switch (genre) {
+                case "all":
+                  return requests.fetchDocumentariesAll;
+                  break;
+                case "movie":
+                  return requests.fetchDocumentariesMovie;
+                  break;
+                case "tv":
+                  return requests.fetchDocumentariesTv;
+                  break;
+              }
+            })()}
+          />
+        </>
+      )}
     </div>
   );
 }

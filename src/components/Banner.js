@@ -6,7 +6,7 @@ import "../styles/Banner.css";
 const Banner = (props) => {
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get(requests.fetchNetflixOriginals);
+      const request = await axios.get(requests.fetchNetflixOriginalsTv);
       props.setMovie(
         request.data.results[
           Math.floor(Math.random() * request.data.results.length - 1)
@@ -44,8 +44,12 @@ const Banner = (props) => {
             props.movie?.original_name}
         </h1>
         <div className="banner_buttons">
-          <button className="banner_button">Play</button>
-          <button className="banner_button">My List</button>
+          <button className="banner_button">
+            <i class="fas fa-play"></i>Play
+          </button>
+          <button className="banner_button">
+            <i class="fas fa-info-circle"></i>More Info
+          </button>
         </div>
 
         <h1 className="banner_description">

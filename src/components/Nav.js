@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { slide as Menu } from "react-burger-menu";
+
 import "../styles/Nav.css";
 
-const Nav = () => {
+const Nav = (props) => {
   const [show, handleShow] = useState(false);
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -10,7 +12,7 @@ const Nav = () => {
       } else handleShow(false);
     });
     return () => {
-      window.removeEventListener("scroll");
+      window.removeEventListener("scroll", window);
     };
   }, []);
 
@@ -21,6 +23,33 @@ const Nav = () => {
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1280px-Netflix_2015_logo.svg.png"
         alt="Netflix Logo"
       />
+      <ul>
+        <li
+          className={props.genre === "all" ? "active-li" : ""}
+          onClick={() => props.setGenre("all")}
+        >
+          Home
+        </li>
+        <li
+          className={props.genre === "tv" ? "active-li" : ""}
+          onClick={() => props.setGenre("tv")}
+        >
+          TV Shows
+        </li>
+        <li
+          className={props.genre === "movie" ? "active-li" : ""}
+          onClick={() => props.setGenre("movie")}
+        >
+          Movies
+        </li>
+        <li
+          className={props.genre === "new" ? "active-li" : ""}
+          onClick={() => props.setGenre("new")}
+        >
+          Recently Added
+        </li>
+        <li>My List</li>
+      </ul>
       <img
         className="nav_avatar"
         src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
