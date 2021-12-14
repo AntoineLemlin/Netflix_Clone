@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { slide as Menu } from "react-burger-menu";
 
 import "../styles/Nav.css";
 
@@ -48,7 +47,12 @@ const Nav = (props) => {
         >
           Recently Added
         </li>
-        <li>My List</li>
+        <li
+          className={props.genre === "list" ? "active-li" : ""}
+          onClick={() => props.setGenre("list")}
+        >
+          My List
+        </li>
       </ul>
       <img
         className="nav_avatar"

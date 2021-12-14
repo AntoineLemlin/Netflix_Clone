@@ -26,6 +26,21 @@ const Banner = (props) => {
   function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
   }
+
+  const addList = () => {
+    if (!props.list.includes(props.movie)) {
+      console.log("hello");
+      const newArray = props.list.concat(props.movie);
+      props.setList(newArray);
+    } else {
+      props.list.map((el, index) => {
+        if (el.id === props.movie.id) {
+          const newArray = props.list.filter((el) => el !== props.movie);
+          props.setList(newArray);
+        }
+      });
+    }
+  };
   return (
     <header
       className="banner"
@@ -47,11 +62,13 @@ const Banner = (props) => {
           <button className="banner_button">
             <i class="fas fa-play"></i>Play
           </button>
-          <button className="banner_button">
-            <i class="fas fa-info-circle"></i>More Info
+          <button onClick={addList} className="banner_button">
+            {!props.list.includes(props.movie)
+              ? "Add To My List"
+              : "Remove Of My List"}
           </button>
         </div>
-
+        {console.log(props.list)}
         <h1 className="banner_description">
           {truncate(props.movie?.overview, 150)}
         </h1>
