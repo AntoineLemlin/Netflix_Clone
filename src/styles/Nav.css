@@ -37,6 +37,7 @@
   margin-right: 20px;
   width: 90px;
   object-fit: contain;
+  cursor: pointer;
 }
 
 .nav_avatar {
