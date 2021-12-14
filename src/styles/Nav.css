@@ -63,7 +63,9 @@
   .nav ul {
     position: absolute;
     bottom: -15%;
-    left: 0;
-    transform: translateX(15%);
+    left: 50%;
+    transform: translateX(-58%);
+    width: 100%;
+    justify-content: center;
   }
 }
